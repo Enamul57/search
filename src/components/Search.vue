@@ -213,17 +213,22 @@
       </div>
       <div class="row option5 mb-3">
         <div class="optionbox">
-          <label for="">Tags</label>
+          <label for="" style="color: #675aaa">Name Tags</label>
           <textarea
-            class="form-control"
+            class="form-control tagspan"
             name=""
             id=""
-            cols="35"
+            cols="30"
             rows="5"
             style="border: 1px solid #675aaa"
+            v-model="search"
           ></textarea>
-          <span class="s_action btn mt-3" style="width: 170px">
-            <i class="fas fa-search mr-2"></i> save search</span
+          <span
+            class="s_action btn mt-3"
+            style="width: 170px"
+            @click="filterSearch"
+          >
+            <i class="fas fa-search mr-2"></i> Search</span
           >
           <span
             class="btn mt-2"
@@ -269,14 +274,17 @@
             </div>
 
             <div class="col-md-8 btngroup isgrp" style="width: 600px">
-              <span class="btn info"> Age: {{ age }}</span>
+              <span class="btn info"> {{ age }} years</span>
               <span class="btn info" style="font-size: 14px">
                 {{ feet }} feet {{ inch }} inch</span
               >
-              <span class="btn info" v-if="showrel"> {{ rel }}</span>
-              <span class="btn info" v-if="showcou"> {{ country }}</span>
-              <span class="btn info" v-if="showgen"> {{ gender }}</span>
-              <span class="btn info" v-if="showsta"> {{ status }}</span>
+              <span class="btn info" v-if="showrel" @click='relfalse'>
+                {{ rel }}
+               </span
+              >
+              <span class="btn info" v-if="showcou" @click='coufalse'> {{ country }}</span>
+              <span class="btn info" v-if="showgen" @click='genfalse'> {{ gender }}</span>
+              <span class="btn info" v-if="showsta" @click='stafalse'> {{ status }}</span>
             </div>
           </div>
           <div class="row thirdrow">
@@ -284,7 +292,7 @@
               <div class="list">
                 <ul>
                   <li
-                    v-for="pro in profile"
+                    v-for="pro in filterSearch"
                     :key="pro.id"
                     style="list-style: none; margin-bottom: 5px"
                   >
@@ -315,12 +323,24 @@
                       style="position: absolute; left: 262px; padding-top: 40px"
                       >{{ pro.age }} years</span
                     >
-                    
-                        <span class="btn over "><i class="fas fa-star"></i>Short List </span>
-                      <span class="btn  " style='background: #8b83c6;color:white'> <i class="fas fa-star" style='margin-left:5px;'></i> Team List</span>
-                      <span class="btn " style='background: #8b83c6;color:white'> <i class="fas fa-network-wired" style='margin-left:5px;'></i> Connect </span>
-                      <span class="btn " style='background:#ef217b;color:white'><i class="fas fa-ban" ></i> Block</span>
-                    
+
+                    <span class="btn over"
+                      ><i class="fas fa-star"></i>Short List
+                    </span>
+                    <span class="btn" style="background: #8b83c6; color: white">
+                      <i class="fas fa-star" style="margin-left: 5px"></i> Team
+                      List</span
+                    >
+                    <span class="btn" style="background: #8b83c6; color: white">
+                      <i
+                        class="fas fa-network-wired"
+                        style="margin-left: 5px"
+                      ></i>
+                      Connect
+                    </span>
+                    <span class="btn" style="background: #ef217b; color: white"
+                      ><i class="fas fa-ban"></i> Block</span
+                    >
                   </li>
                 </ul>
               </div>
@@ -351,6 +371,7 @@ export default {
       showsta: false,
       showcou: false,
       showgen: false,
+      search: "",
       religions: [
         { id: 1, name: "Islam" },
         { id: 2, name: "Hindu" },
@@ -382,35 +403,35 @@ export default {
         },
         {
           id: 2,
-          name: "Enamul",
+          name: "Rakib",
           age: 25,
           country: "Bangladesh",
           image: "img.jpg",
         },
         {
           id: 3,
-          name: "Enamul",
+          name: "Arif",
           age: 25,
           country: "Bangladesh",
           image: "img.jpg",
         },
         {
           id: 4,
-          name: "Enamul",
+          name: "Arman",
           age: 25,
           country: "Bangladesh",
           image: "img.jpg",
         },
         {
           id: 5,
-          name: "Enamul",
+          name: "Fahim",
           age: 25,
           country: "Bangladesh",
           image: "img.jpg",
         },
         {
           id: 6,
-          name: "Enamul",
+          name: "Sadi",
           age: 25,
           country: "Bangladesh",
           image: "img.jpg",
@@ -490,6 +511,26 @@ export default {
         }
       });
     },
+    relfalse(){
+      this.showrel = false;
+    },
+    coufalse(){
+      this.showcou = false;
+    },
+    genfalse(){
+      this.showgen = false;
+
+    },
+    stafalse(){
+      this.showsta = false;
+    }
+  },
+  computed: {
+    filterSearch() {
+      return this.profile.filter((list) => {
+        return list.name.match(this.search);
+      });
+    },
   },
 };
 </script>
@@ -500,7 +541,7 @@ export default {
   height: 100%;
   width: 350px;
   height: 800px;
-  margin-bottom:200px;
+  margin-bottom: 200px;
 }
 .search_header {
   background: #675aaa;
@@ -716,36 +757,41 @@ export default {
   display: flex;
 }
 .info {
-  width: 115px;
   background: #8b83c6;
   margin-left: 5px;
-  height: 30px;
+  height: 36px;
   color: white;
 }
 .info:hover {
   color: white;
 }
-.over{
-   background: #8b83c6;
+.over {
+  background: #8b83c6;
   margin-left: 5px;
   height: 30px;
   color: white;
-  margin-left:200px;
-  height:35px;
+  margin-left: 200px;
+  height: 35px;
 }
-.list_manager{
-  width:845px;
-  top:0;
-  left:0;
-  right:0;
-position:relative;
+.list_manager {
+  width: 845px;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: relative;
 }
-.isgrp{
-     width: 600px;
-    display: flex;
-    /* margin-bottom: -9px; */
-    position: relative;
-    top: -40px;
-    left: 170px;
+.isgrp {
+  width: 600px;
+  display: flex;
+  /* margin-bottom: -9px; */
+  position: relative;
+  top: -40px;
+  left: 170px;
+}
+.tagspan {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 </style>
