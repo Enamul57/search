@@ -500,6 +500,7 @@ export default {
   height: 100%;
   width: 350px;
   height: 800px;
+  margin-bottom:200px;
 }
 .search_header {
   background: #675aaa;
@@ -738,7 +739,7 @@ export default {
   top:0;
   left:0;
   right:0;
-  
+
 }
 
 </style>
