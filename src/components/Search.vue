@@ -268,7 +268,7 @@
               ></i>
             </div>
 
-            <div class="col-md-8 btngroup" style="width: 600px">
+            <div class="col-md-8 btngroup isgrp" style="width: 600px">
               <span class="btn info"> Age: {{ age }}</span>
               <span class="btn info" style="font-size: 14px">
                 {{ feet }} feet {{ inch }} inch</span
@@ -734,11 +734,17 @@ export default {
   height:35px;
 }
 .list_manager{
-  width:800px;
+  width:845px;
   top:0;
   left:0;
   right:0;
 position:relative;
 }
-
+.isgrp{
+  width: 600px;
+    display: inline;
+    /* margin-bottom: -9px; */
+    position: relative;
+    top: -40px;
+}
 </style>
