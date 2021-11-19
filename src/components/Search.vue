@@ -735,7 +735,6 @@ export default {
 }
 .list_manager{
   width:800px;
-  position:relative;
   top:0;
   left:0;
   right:0;
