@@ -312,7 +312,7 @@
                     >
                       {{ pro.country }} </span
                     ><span
-                      style="position: absolute; left: 230px; padding-top: 40px"
+                      style="position: absolute; left: 262px; padding-top: 40px"
                       >{{ pro.age }} years</span
                     >
                     
@@ -738,7 +738,7 @@ export default {
   top:0;
   left:0;
   right:0;
-
+position:relative;
 }
 
 </style>
