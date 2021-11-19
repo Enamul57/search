@@ -741,10 +741,11 @@ export default {
 position:relative;
 }
 .isgrp{
-  width: 600px;
-    display: inline;
+     width: 600px;
+    display: flex;
     /* margin-bottom: -9px; */
     position: relative;
     top: -40px;
+    left: 170px;
 }
 </style>
